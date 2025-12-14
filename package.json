@@ -1,0 +1,13 @@
+{
+  "name": "novu-demo",
+  "version": "1.0.0",
+  "description": "Novu In-App Inbox Demo - Order Status Notifications",
+  "license": "MIT",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run serve",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run serve"
+  }
+}

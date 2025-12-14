@@ -1,0 +1,25 @@
+{
+  "name": "novu-demo-frontend",
+  "version": "1.0.0",
+  "description": "Vue 2 frontend for Novu In-App Inbox demo",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@novu/js": "^3.11.0",
+    "axios": "^1.6.0",
+    "core-js": "^3.33.0",
+    "vue": "^2.7.14",
+    "vue-router": "^3.6.5"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "vue-template-compiler": "^2.7.14"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
