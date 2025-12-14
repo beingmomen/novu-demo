@@ -1,27 +1,25 @@
 <template>
-  <div class="novu-inbox-wrapper">
-    <div ref="inboxContainer" id="novu-inbox"></div>
-  </div>
+  <div ref="novuInbox"></div>
 </template>
 
 <script>
-import { NovuUI } from '@novu/js/ui';
+import { NovuUI } from "@novu/js/ui";
 
 export default {
-  name: 'NovuInbox',
+  name: "NovuInbox",
   props: {
     applicationIdentifier: {
       type: String,
-      required: true
+      required: true,
     },
     subscriberId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      novu: null
+      novuInstance: null,
     };
   },
   mounted() {
@@ -38,57 +36,42 @@ export default {
           this.initNovu();
         });
       }
-    }
+    },
   },
   methods: {
     initNovu() {
-      if (!this.applicationIdentifier || !this.subscriberId) {
-        console.warn('NovuInbox: Missing applicationIdentifier or subscriberId');
+      if (!this.$refs.novuInbox) {
+        console.error("Novu inbox container element not found");
         return;
       }
 
       try {
-        this.novu = new NovuUI({
+        this.novuInstance = new NovuUI({
           options: {
             applicationIdentifier: this.applicationIdentifier,
-            subscriberId: this.subscriberId
-          }
+            subscriberId: this.subscriberId,
+          },
         });
 
-        // Mount inbox to container
-        if (this.$refs.inboxContainer) {
-          this.novu.mountComponent({
-            name: 'Inbox',
-            props: {
-              open: true
-            },
-            element: this.$refs.inboxContainer
-          });
-        }
-        console.log('NovuInbox mounted with subscriberId:', this.subscriberId);
+        this.novuInstance.mountComponent({
+          name: "Inbox",
+          props: {},
+          element: this.$refs.novuInbox,
+        });
       } catch (error) {
-        console.error('Failed to initialize Novu:', error);
+        console.error("Failed to initialize Novu inbox:", error);
       }
     },
     destroyNovu() {
-      if (this.novu) {
+      if (this.novuInstance && this.$refs.novuInbox) {
         try {
-          this.novu.unmountComponent({
-            element: this.$refs.inboxContainer
-          });
-        } catch (e) {
+          this.novuInstance.unmountComponent(this.$refs.novuInbox);
+        } catch (error) {
           // Ignore unmount errors
         }
-        this.novu = null;
+        this.novuInstance = null;
       }
-    }
-  }
+    },
+  },
 };
 </script>
-
-<style scoped>
-.novu-inbox-wrapper {
-  width: 100%;
-  min-height: 400px;
-}
-</style>

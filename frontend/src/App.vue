@@ -18,7 +18,7 @@
             :selectedUser="selectedUser"
             @select="selectUser"
           />
-          <NotificationBell
+          <NovuInbox
             v-if="selectedUser"
             :applicationIdentifier="novuAppId"
             :subscriberId="selectedUser.novuSubscriberId"
@@ -45,13 +45,13 @@
 <script>
 import api from './services/api';
 import UserSelector from './components/UserSelector.vue';
-import NotificationBell from './components/NotificationBell.vue';
+import NovuInbox from './components/NovuInbox.vue';
 
 export default {
   name: 'App',
   components: {
     UserSelector,
-    NotificationBell
+    NovuInbox
   },
   data() {
     return {
